@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: camagru-php
+    ports:
+     - "8080:8080"
+    volumes:
+     - .:/usr/src/camagru
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "xEEFcds54548a8zd"
+      MYSQL_DATABASE: "camagru"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+
+  mysql:
+    image: mysql
+    container_name: camagru-mysql
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "xEEFcds54548a8zd"
+      MYSQL_DATABASE: "camagru"
+      MYSQL_USER: "camagru-dev"
+      MYSQL_PASSWORD: "1234"
