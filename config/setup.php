@@ -13,6 +13,8 @@
 			`updated_at` datetime DEFAULT NOW()
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 		$dbh->exec($query);
+
+		session_start();
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage() . "<br/>";
 		die();
