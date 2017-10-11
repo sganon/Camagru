@@ -1,5 +1,6 @@
 <?php
 	include "./config/setup.php";
+	var_dump($_COOKIE);
 ?>
 <html>
 	<head>
@@ -12,8 +13,8 @@
 		</header>
 
 		<div id="main">
-			<?php if (isset($_SESSION["logguedUser"])) :?> 
-				User connection_aborted
+			<?php if (isset($_COOKIE["user_id"])) :?>
+				User connected
 			<?php else:?>
 				<div id="suForm">
 					<label for="login">Login</label>
@@ -32,7 +33,7 @@
 					<input type="password" name="passwordConfirm" id="suPwdConf">
 					<span id="pwdConfErr" class="err"></span><br>
 					
-					<input type="submit" value="Sign Up" onclick="createUser();">
+					<input id="suSubmit" type="submit" value="Sign Up" onclick="createUser();">
 				</div>
 			<?php endif;?>
 		</div>

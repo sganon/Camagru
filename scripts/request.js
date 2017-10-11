@@ -2,6 +2,11 @@ function test() {
 	alert("lol");
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 function displayFormError(elemId, text) {
 	var elem = document.getElementById(elemId);
 	elem.innerHTML = text;
@@ -25,15 +30,36 @@ function createUser() {
 		pwdConf: document.getElementById('suPwdConf').value
 	};
 
+	var e;
 	if (user.pwd !== user.pwdConf) {
-		displayFormError("pwdConfErr", "Passwords must match")
+		e = true;
+		displayFormError("pwdConfErr", "Passwords must match");
 	}
 	if (user.pwd.length < 6) {
-		displayFormError("pwdErr", "Password must be at least 6 characters long")		
+		e = true;
+		displayFormError("pwdErr", "Password must be at least 6 characters long");
+	}
+	if (!validateEmail(user.email)) {
+		e = true;
+		displayFormError("emailErr", "Please enter a correct email");
+	}
+	if (!/^[a-z0-9]+$/i.test(user.login)) {
+		e = true;
+		displayFormError("loginErr", "Login can only contain letters or numbers");
 	}
 
-	var xhttp = new XMLHttpRequest();
-	xhttp.open("POST", "/api/user.php", true);
-	xhttp.setRequestHeader("Content-type", "application/json");
-	xhttp.send(JSON.stringify(user));
+	if (e !== true) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "/api/user.php", true);
+
+		xhttp.setRequestHeader("Content-type", "application/json");
+		xhttp.send(JSON.stringify(user));
+
+		xhttp.onload = function () {
+			res = JSON.parse(xhttp.response);
+			console.log(res);
+			document.cookie = "user_id=" + res.ID + ";";
+			location.reload();
+		}
+	}
 }
