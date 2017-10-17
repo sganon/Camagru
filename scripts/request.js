@@ -56,10 +56,19 @@ function createUser() {
 		xhttp.send(JSON.stringify(user));
 
 		xhttp.onload = function () {
-			res = JSON.parse(xhttp.response);
-			console.log(res);
-			document.cookie = "user_id=" + res.ID + ";";
-			location.reload();
+			console.log(xhttp);
+			if (xhttp.readyState === 4) {
+				res = JSON.parse(xhttp.response);
+				console.log(res);
+				if (xhttp.status === 200) {
+					document.cookie = "user_id=" + res.ID + ";";
+					location.reload();
+				} else {
+					if (res[1] === 1062) {
+						displayFormError("emailErr", "Email is already in use");
+					}
+				}	
+			}
 		}
 	}
 }

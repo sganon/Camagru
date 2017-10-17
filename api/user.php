@@ -8,13 +8,15 @@
 	$hash = password_hash($data["pwd"], PASSWORD_BCRYPT, array("cost" => 11));
 	$data["pwd"] = $hash;
 	$user = new User($dbh, $data);
-	$fetchedUser = $user->getByEmail();
-	if ($fetchedUser == NULL) {
+	try {
 		$createdUser = $user->create();
-		http_response_code(200);
+		if (isset($createdUser["ID"])) {
+			http_response_code(200);
+		} else {
+			http_response_code(500);
+		}
 		echo json_encode($createdUser);
-	} else {
-		http_response_code(409);
-		echo json_decode(array("message" => "User already exist"));
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage() . "<br/>";
 	}
 ?>

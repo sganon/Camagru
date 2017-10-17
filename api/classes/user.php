@@ -23,10 +23,14 @@
                 $stmt->bindValue('login', $this->_user["login"], PDO::PARAM_STR);
                 $stmt->bindValue('email', $this->_user["email"], PDO::PARAM_STR);
                 $stmt->bindValue('password', $this->_user["pwd"], PDO::PARAM_STR);
-                $debug = $stmt->execute();
-                return $this->getByEmail();
+                if (!$stmt->execute()) {
+                    return $stmt->errorInfo();
+                } else {
+                    return $this->getByEmail();
+                }
             } catch (Exception $e) {
                 echo $e->getMessage();
+                return e;
             }
 
         }

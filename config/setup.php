@@ -7,7 +7,7 @@
 			`ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			`login` varchar(50) NOT NULL,
 			`password` varchar(255) NOT NULL,
-			`email` varchar(255) NOT NULL,
+			`email` varchar(255) NOT NULL UNIQUE,
 			`is_validated` tinyint NOT NULL DEFAULT 0,
 			`created_at` datetime DEFAULT NOW(),
 			`updated_at` datetime DEFAULT NOW()
