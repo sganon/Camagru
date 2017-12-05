@@ -1,17 +1,14 @@
-function signUp() {
+function login () {
     var request = {
         user: {
-            firstname: document.getElementById('firstname').value,
-            lastname: document.getElementById('lastname').value,
-            email: document.getElementById('email').value,
             pwd: document.getElementById('pwd').value,
             login: document.getElementById('login').value,
         },
-        requestType: "creation"
+        requestType: "login"
     };
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/SignUp/controller.php", true);
+    xhttp.open("POST", "/Login/controller.php", true);
 
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(request));
@@ -24,7 +21,7 @@ function signUp() {
                 document.cookie = "token=" + res.token + ";";
                 location.reload();
             } else {
-               
+                
             }
         }
     }

@@ -2,22 +2,20 @@
     <div class="tab-content">
       <div id="signup">   
         <h1>Welcome Back</h1>
-        <form action="./" method="post">
         <div class="field-wrap">
           <label>
-            Email Address<span class="req">*</span>
+            Login<span class="req">*</span>
           </label>
-          <input type="email"required autocomplete="off"/>
+          <input type="txt"required autocomplete="off" id="login"/>
         </div>     
         <div class="field-wrap">
           <label>
             Password<span class="req">*</span>
           </label>
-          <input type="password"required autocomplete="off"/>
+          <input type="password"required autocomplete="off" id="pwd"/>
         </div>
         <p class="forgot"><a href="#">Forgot Password?</a></p>
-        <button type="submit" class="button button-block"/>Get Started</button>
-        </form>
+        <button type="submit" class="button button-block" onclick="login()"/>Get Started</button>
       </div>
     </div><!-- tab-content -->  
   </div> <!-- /form -->

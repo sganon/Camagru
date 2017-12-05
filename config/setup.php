@@ -7,7 +7,7 @@
 			`ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			`firstname` varchar(50) NOT NULL,
 			`lastname` varchar(50) NOT NULL,
-			`login` varchar(50) NOT NULL,
+			`login` varchar(50) NOT NULL UNIQUE,
 			`password` varchar(255) NOT NULL,
 			`email` varchar(255) NOT NULL UNIQUE,
 			`is_validated` tinyint NOT NULL DEFAULT 0,

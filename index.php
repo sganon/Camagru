@@ -60,5 +60,6 @@
 		</div> <!-- /bottom -->
 	</div> <!-- /right-column --> 
 	<script src="/SignUp/signup.js"></script>
+	<script src="/Login/login.js"></script>
 </body>
 </html>
