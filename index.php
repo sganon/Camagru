@@ -12,12 +12,53 @@
 	}
 	
 	if (empty($_SESSION["logguedUser"])) {
-		if ($_GET["signup"] == "true") {
-			require "SignUp/view.php";
+		if (isset($_GET["signup"]) && $_GET["signup"] == "true") {
+			$view = 'SignUp/view.php';
+			$title = 'Sign Up';
+			$suClass = 'active';
+			$loginClass = '';
 		} else {
-			require 'Login/view.php';
+			$view = 'Login/view.php';
+			$title = 'Login';
+			$loginClass = 'active';
+			$suClass = '';
 		}
 	} else {
-		require 'Home/view.php';		
+		$view = 'Home/view.php';
+		$title = 'Home';		
 	}
+	
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Camagru</title>
+	<link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+	<div id="left" class="column">
+        <div class="top-left">
+			<h1>Camagru</h1>
+		</div>
+        <div class="bottom">
+			<ul class="tab-group">
+        		<li class="tab <?php echo $suClass; ?>"><a href="/index.php?signup=true">Sign Up</a></li>
+       	 		<li class="tab <?php echo $loginClass; ?>"><a href="/index.php">Log In</a></li>
+   			</ul>
+		</div>
+    </div>
+	<div id="right" class="column">
+        <div class="top-right">
+			<h1><?php echo $title; ?></h1>
+		</div>
+        <div class="bottom">
+			<?php require $view; ?>
+		</div> <!-- /bottom -->
+	</div> <!-- /right-column --> 
+	<script src="/SignUp/signup.js"></script>
+</body>
+</html>
